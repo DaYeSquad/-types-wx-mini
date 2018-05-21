@@ -1,8 +1,55 @@
 // Copyright 2018 Frank Lin (lin.xiaoe.f@gmail.com). All rights reserved.
 // Use of this source code is governed a license that can be found in the LICENSE file.
-declare function Page(options: any): void;
-declare function setData(data: any): void;
+
+/**
+ * 页面初始化参数
+ * https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page.html
+ */
+declare interface PageInitOptions {
+  /**
+   * 开发者可以添加任意的函数或数据到 object 参数中，在页面的函数中用 this 可以访问
+   */
+  [key: string]: any;
+
+  data?: any;
+
+  onLoad?: (options?: any) => void;
+
+  onReady?: () => void;
+
+  onShow?: () => void;
+
+  onHide?: () => void;
+
+  onUnload?: () => void;
+
+  onPullDownRefresh?: () => void;
+
+  onReachBottom?: () => void;
+
+  onShareAppMessage?: () => void;
+
+  onPageScroll?: () => void;
+
+  onTabItemTap?: () => void;
+}
+
+/**
+ * Page() 函数用来注册一个页面。接受一个 object 参数，其指定页面的初始数据、生命周期函数、事件处理函数等。
+ */
+declare function Page(options: PageInitOptions): void;
+
+/**
+ * setData 函数用于将数据从逻辑层发送到视图层（异步），同时改变对应的 this.data 的值（同步）
+ */
+declare function setData(data: any, callback?: Function): void;
+
 declare function setTimeout(fn: Function, ms: number): void;
+
+/**
+ * getCurrentPages() 函数用于获取当前页面栈的实例，以数组形式按栈的顺序给出，第一个元素为首页，最后一个元素为当前页面。
+ * Tip：不要尝试修改页面栈，会导致路由以及页面状态错误。
+ */
 declare function getCurrentPages(): any;
 
 declare namespace wx {
